@@ -1,0 +1,41 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%title Memehub
+		= csrf_meta_tags
+		= csp_meta_tag
+		= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+		= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+	%body
+		-# %p.notice= notice
+		-# %p.alert= alert
+
+		%nav.navbar.navbar-expand-lg.navbar-light.bg-dark
+			%a.navbar-brand{href: "#"}
+				= "Navbar"
+
+			.collapse.navbar-collapse
+				%ul.navbar-nav.mr-auto
+					%li.nav-item.active.mx-3
+						= link_to("Najnowsze", root_path)
+					%li.nav-item.mx-3
+						= link_to("Oczekujące", root_path)
+					%li.nav-item.mx-3
+						= link_to("Losowe", root_path)
+					%li.nav-item.mx-3
+						= link_to("Top", root_path)
+					%li.nav-item.mx-3
+						= link_to("Dodaj", new_meme_path)
+		.container
+			.row
+				.col-lg-6.offset-lg-2
+					= yield
+				.col-lg-2
+					= "Panel użytkownika"
+					- if !user_signed_in?
+						= simple_form_for(User.new, as: :user, method: :post, url: "/users") do |f|
+							= f.input :username
+							= f.input :email
+							= f.input :password
+							= f.submit

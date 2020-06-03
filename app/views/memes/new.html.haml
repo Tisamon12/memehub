@@ -1,4 +1,6 @@
-= simple_form_for @meme do |f|
-	= f.input :title
-	= f.file_field :meme_img
-	= f.submit
+.mt-5
+	= simple_form_for @meme do |f|
+		= f.input :title
+		.form-group
+			= f.file_field :meme_img
+		= f.submit "Dodaj", class: "btn btn-dark"

@@ -1,0 +1,19 @@
+pl:
+  simple_form:
+    labels:
+      meme:
+        title: 'Tytuł'
+    hints:
+      user:
+        username: 'User name to sign in.'
+        password: 'No special characters, please.'
+    placeholders:
+      user:
+        username: 'Your username'
+        password: '****'
+    include_blanks:
+      user:
+        age: 'Rather not say'
+    prompts:
+      user:
+        role: 'Select your role'

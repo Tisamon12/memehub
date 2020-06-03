@@ -1,0 +1,9 @@
+.mt-5.meme-container
+	.row.title-container
+		.col-lg-11
+			= meme.title
+			-# TODO favourite button
+	.row.desc-container
+		.col-lg-12
+			= meme.created_at
+	= image_tag meme.meme_img.variant(resize_to_fit: [500, nil])
