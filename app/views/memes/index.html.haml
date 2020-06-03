@@ -1,0 +1,11 @@
+- if !user_signed_in?
+	= simple_form_for(User.new, as: :user, method: :post, url: "/users") do |f|
+		= f.input :username
+		= f.input :email
+		= f.input :password
+		= f.submit
+- else
+	= link_to("Dodaj mema", new_meme_path)
+
+- @memes.each do |meme|
+	= image_tag meme.meme_img.variant(resize_to_limit: [500, 500])
