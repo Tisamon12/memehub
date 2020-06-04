@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   root to: "memes#index"
 
-  resources :memes
+  resources :memes, :comments
 end

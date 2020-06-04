@@ -6,4 +6,6 @@
 	.row.desc-container
 		.col-lg-12
 			= meme.created_at
-	= image_tag meme.meme_img.variant(resize_to_fit: [500, nil])
+			= meme.user.username
+	= link_to meme_path(meme) do
+		= image_tag meme.meme_img.variant(resize_to_fit: [500, nil])

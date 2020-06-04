@@ -1,0 +1,11 @@
+= image_tag @meme.meme_img.variant(resize_to_fit: [500, nil])
+
+= simple_form_for Comment.new, html: {autocomplete: "off"} do |f|
+	= f.input_field :meme_id, as: :hidden, value: @meme.id
+	= f.input :content
+	= f.submit
+
+- @meme.comments.prime.each do |comment|
+	= render partial: "comment", locals: {comment: comment}
+
+= javascript_pack_tag "comments"

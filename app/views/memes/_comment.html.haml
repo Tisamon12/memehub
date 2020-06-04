@@ -1,0 +1,29 @@
+.container.comment-container
+	.row
+		.col-lg-1
+			-# AVATAR
+		.col-lg-11
+			.comment-header
+				= comment.user.username
+				= comment.created_at
+				%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
+			.comment-text
+				= comment.content
+
+- comment.child_comments.each do |child_comment|
+	.container.child-comment-container
+		.row
+			.col-lg-1
+				-# TODO AVATAR
+			.col-lg-11
+				.comment-header
+					= child_comment.user.username
+					= child_comment.created_at
+				.comment-text
+					= child_comment.content
+
+= simple_form_for Comment.new, html: {class: "d-none", autocomplete: "off", data: {comment_id: comment.id}} do |f|
+	= f.input_field :parent_comment_id, as: :hidden, value: comment.id
+	= f.input_field :meme_id, as: :hidden, value: @meme.id
+	= f.input :content
+	= f.submit
