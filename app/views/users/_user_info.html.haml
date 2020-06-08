@@ -1,0 +1,31 @@
+.container
+	.row.user-info
+		.col-lg-3
+			= image_tag current_user.avatar.variant(resize_to_fill: [110, 110])
+		.col-lg-9
+			.row
+				.col-lg-10
+					%h2
+						= current_user.username
+				.col-lg-2
+					-# TODO USER SCORE
+			.row
+				.col-lg-12
+					%i{class: "far fa-image"}
+					= current_user.memes.count
+
+			.row
+				.col-lg-12
+					%i{class: "fas fa-comment"}
+					= current_user.comments.count
+
+			.row
+				.col-lg-12
+					%i{class: "fas fa-flag"}
+					= current_user.created_at
+
+	.row
+		.col-lg-6
+			= link_to "Memy użytkownika", user_path(current_user.id)
+		.col-lg-6
+			= link_to "Komentarze użytkownika", user_comments_path(current_user.id)

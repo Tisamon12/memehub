@@ -1,29 +1,42 @@
 .container.comment-container
 	.row
 		.col-lg-1
-			-# AVATAR
+			= image_tag comment.user.avatar.variant(resize_to_fill: [40, 40])
 		.col-lg-11
 			.comment-header
 				= comment.user.username
 				= comment.created_at
-				%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
+				- if !user_info && user_signed_in?
+					%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
 			.comment-text
 				= comment.content
+	- if user_info
+		= link_to "Przejdź do mema", meme_path(comment.meme.id)
 
-- comment.child_comments.each do |child_comment|
-	.container.child-comment-container
-		.row
-			.col-lg-1
-				-# TODO AVATAR
-			.col-lg-11
-				.comment-header
-					= child_comment.user.username
-					= child_comment.created_at
-				.comment-text
-					= child_comment.content
+- if !user_info
+	- comment.child_comments.each do |child_comment|
+		.container.child-comment-container
+			.row
+				.col-lg-1
+					= image_tag child_comment.user.avatar.variant(resize_to_fill: [40, 40])
+				.col-lg-11
+					.comment-header
+						= child_comment.user.username
+						= child_comment.created_at
+					.comment-text
+						= child_comment.content
 
-= simple_form_for Comment.new, html: {class: "d-none", autocomplete: "off", data: {comment_id: comment.id}} do |f|
-	= f.input_field :parent_comment_id, as: :hidden, value: comment.id
-	= f.input_field :meme_id, as: :hidden, value: @meme.id
-	= f.input :content
-	= f.submit
+
+	- if user_signed_in?
+		= simple_form_for Comment.new, html: {class: "d-none", autocomplete: "off", data: {comment_id: comment.id}} do |f|
+			.container
+				.comment-form-container
+					= f.input_field :parent_comment_id, as: :hidden, value: comment.id
+					= f.input_field :meme_id, as: :hidden, value: @meme.id
+					.row
+						.col-lg-1
+							= image_tag current_user.avatar.variant(resize_to_fill: [40, 40])
+						.col-lg-8
+							= f.input_field :content, label: false, placeholder: "Wpisz swój komentarz", class: "add-comment"
+						.col-lg-3
+							= f.submit "Skomentuj", class: "btn-comment"

@@ -3,5 +3,5 @@ class Meme < ApplicationRecord
 
   has_one_attached :meme_img
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end

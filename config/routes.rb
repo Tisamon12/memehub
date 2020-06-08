@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
   root to: "memes#index"
 
-  resources :memes, :comments
+  resources :memes, :comments, :users
+
+  get "users/:id/comments", to: "users#comments", as: "user_comments"
 end

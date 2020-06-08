@@ -1,0 +1,4 @@
+= render partial: "user_info"
+
+- current_user.memes.each do |meme|
+	= render partial: "memes/meme", locals: {meme: meme}

@@ -1,11 +1,21 @@
-= image_tag @meme.meme_img.variant(resize_to_fit: [500, nil])
+= image_tag @meme.meme_img.variant(resize_to_fit: [540, nil])
 
-= simple_form_for Comment.new, html: {autocomplete: "off"} do |f|
-	= f.input_field :meme_id, as: :hidden, value: @meme.id
-	= f.input :content
-	= f.submit
+.container
+	.comment-form-container
+		- if user_signed_in?
+			= simple_form_for Comment.new, html: {autocomplete: "off"} do |f|
+				= f.input_field :meme_id, as: :hidden, value: @meme.id
+				.row
+					.col-lg-1
+						= image_tag current_user.avatar.variant(resize_to_fill: [40, 40])
+					.col-lg-8
+						= f.input_field :content, label: false, placeholder: "Wpisz swój komentarz", class: "add-comment"
+					.col-lg-3
+						= f.submit "Skomentuj", class: "btn-comment"
+		- else
+			= "Zaloguj się aby skomentować"
 
 - @meme.comments.prime.each do |comment|
-	= render partial: "comment", locals: {comment: comment}
+	= render partial: "comment", locals: {comment: comment, user_info: false}
 
 = javascript_pack_tag "comments"
