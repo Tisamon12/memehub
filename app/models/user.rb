@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :memes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favourites, dependent: :destroy
+  has_many :favourite_memes, through: :favourites, source: "meme"
 
   has_one_attached :avatar
 

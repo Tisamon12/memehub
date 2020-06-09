@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   resources :memes, :comments, :users
 
+  resources :favourites, only: [:index, :create, :destroy]
+
   get "users/:id/comments", to: "users#comments", as: "user_comments"
 end

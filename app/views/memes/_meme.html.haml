@@ -1,8 +1,15 @@
-.mt-5.meme-container
+.mb-5.meme-container
 	.row.title-container
 		.col-lg-11
 			= meme.title
-			-# TODO favourite button
+		.col-lg-1
+			- if user_signed_in?
+				- if meme.favourites.where(user_id: current_user.id).blank?
+					= link_to favourites_path(meme_id: meme.id), method: :post, remote: true do
+						%i.far.fa-star{data: {meme_id: meme.id}}
+				- else
+					= link_to favourite_path(Favourite.where(meme_id: meme.id, user_id: current_user.id).first.id), method: :delete, remote: true do
+						%i.fas.fa-star{data: {meme_id: meme.id}}
 	.row.desc-container
 		.col-lg-12
 			= meme.created_at

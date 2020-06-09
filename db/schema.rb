@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_075945) do
+ActiveRecord::Schema.define(version: 2020_06_09_073100) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_06_04_075945) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favourites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "meme_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["meme_id"], name: "index_favourites_on_meme_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "memes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.datetime "upload_date"
@@ -65,5 +74,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_075945) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favourites", "memes"
+  add_foreign_key "favourites", "users"
   add_foreign_key "memes", "users"
 end

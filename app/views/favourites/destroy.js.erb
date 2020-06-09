@@ -1,0 +1,5 @@
+var icon = $("i[data-meme-id='" + <%= @favourite.meme.id %> +"']")
+icon.removeClass("fas")
+icon.addClass("far")
+icon.parent().attr("data-method", "post")
+icon.parent().attr("href", "/favourites?meme_id="+ <%= @favourite.meme.id %>)

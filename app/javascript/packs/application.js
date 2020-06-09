@@ -10,6 +10,8 @@ require("channels")
 
 import "@fortawesome/fontawesome-free/css/all.css";
 
+import $ from 'jquery';
+global.$ = jQuery;
 
 $(document).ready(() => {
 	$("#sign-in-btn").click((e) => {

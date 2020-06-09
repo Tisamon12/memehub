@@ -1,4 +1,4 @@
-= image_tag @meme.meme_img.variant(resize_to_fit: [540, nil])
+= render partial: "meme", locals: {meme: @meme}
 
 .container
 	.comment-form-container
