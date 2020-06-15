@@ -6,5 +6,7 @@ class Comment < ApplicationRecord
 
   belongs_to :parent_comment, class_name: "Comment", optional: true
 
+  has_many :votes, as: :resource
+
   scope :prime, -> {where(parent_comment_id: nil)}
 end

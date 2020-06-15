@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   resources :favourites, only: [:index, :create, :destroy]
 
+  resources :votes, only: [:create]
+
   get "users/:id/comments", to: "users#comments", as: "user_comments"
 end

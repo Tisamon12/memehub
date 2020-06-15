@@ -5,4 +5,6 @@ class Meme < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :favourites, dependent: :destroy
+
+  has_many :votes, as: :resource
 end

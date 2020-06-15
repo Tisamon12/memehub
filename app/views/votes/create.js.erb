@@ -1,0 +1,29 @@
+var voteRate = $(".vote-rate[data-resource-id='" + <%= @vote.resource.id %> +"']")
+
+if(<%= @vote.is_upvote %>) {
+	var icon = $(".fa-plus-square[data-resource-id='" + <%= @vote.resource.id %> +"']")
+	var iconToClear = $(".fa-minus-square[data-resource-id='" + <%= @vote.resource.id %> +"']")
+
+	icon.removeClass("vote-btn")
+	icon.addClass("upvote")
+
+	iconToClear.removeClass("downvote")
+	iconToClear.addClass("vote-btn")
+
+	if (<%= @vote.is_upvote_previously_changed? %>) {
+		voteRate.text(parseInt(voteRate.text())+1)
+	}
+} else {
+	var icon = $(".fa-minus-square[data-resource-id='" + <%= @vote.resource.id %> +"']")
+	var iconToClear = $(".fa-plus-square[data-resource-id='" + <%= @vote.resource.id %> +"']")
+
+	icon.removeClass("vote-btn")
+	icon.addClass("downvote")
+
+	iconToClear.removeClass("upvote")
+	iconToClear.addClass("vote-btn")
+
+	if (<%= @vote.is_upvote_previously_changed? %>) {
+		voteRate.text(parseInt(voteRate.text())-1)
+	}
+}

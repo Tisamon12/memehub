@@ -1,4 +1,4 @@
-.container.comment-container
+.container.comment-container.mt-4
 	.row
 		.col-lg-1
 			= image_tag comment.user.avatar.variant(resize_to_fill: [40, 40])
@@ -8,6 +8,8 @@
 				= comment.created_at
 				- if !user_info && user_signed_in?
 					%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
+			.comment-vote-container
+				= render partial: "votes/vote", locals: {resource_id: comment.id, resource_type: "Comment"}
 			.comment-text
 				= comment.content
 	- if user_info
@@ -23,6 +25,8 @@
 					.comment-header
 						= child_comment.user.username
 						= child_comment.created_at
+					.comment-vote-container
+						= render partial: "votes/vote", locals: {resource_id: child_comment.id, resource_type: "Comment"}
 					.comment-text
 						= child_comment.content
 

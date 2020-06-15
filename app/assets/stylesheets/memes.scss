@@ -52,6 +52,12 @@ a:hover {
 	font-size: 12px;
 }
 
+.comment-vote-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 .comment-container {
 	margin-bottom: 20px;
 }
@@ -94,4 +100,20 @@ a:hover {
 
 .user-panel {
 	background-color: #313131;
+}
+
+.fa-plus-square, .fa-minus-square {
+	font-size: 35px;
+}
+
+.upvote {
+	color: green;
+}
+
+.downvote {
+	color: red;
+}
+
+.vote-btn {
+	color: #616161;
 }

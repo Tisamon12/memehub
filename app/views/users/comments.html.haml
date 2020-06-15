@@ -1,6 +1,6 @@
 = render partial: "user_info"
 
 .mt-5
-	- current_user.comments.each do |comment|
+	- @user.comments.each do |comment|
 		.mt-4
 			= render partial: "memes/comment", locals: {comment: comment, user_info: true}

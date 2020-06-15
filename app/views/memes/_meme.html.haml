@@ -6,13 +6,15 @@
 			- if user_signed_in?
 				- if meme.favourites.where(user_id: current_user.id).blank?
 					= link_to favourites_path(meme_id: meme.id), method: :post, remote: true do
-						%i.far.fa-star{data: {meme_id: meme.id}}
+						%i.far.fa-star.fav-btn{data: {meme_id: meme.id}}
 				- else
 					= link_to favourite_path(Favourite.where(meme_id: meme.id, user_id: current_user.id).first.id), method: :delete, remote: true do
-						%i.fas.fa-star{data: {meme_id: meme.id}}
+						%i.fas.fa-star.fav-btn{data: {meme_id: meme.id}}
 	.row.desc-container
 		.col-lg-12
 			= meme.created_at
 			= link_to meme.user.username, meme.user
 	= link_to meme_path(meme) do
 		= image_tag meme.meme_img.variant(resize_to_fit: [540, nil])
+
+	= render partial: "votes/vote", locals: {resource_id: meme.id, resource_type: "Meme"}
