@@ -15,5 +15,14 @@ class User < ApplicationRecord
   has_many :profile_votes, as: :resource, class_name: "Vote"
   has_many :votes
 
-  validates :username, presence: true
+  validates :username, :email, :password, :password_confirmation, presence: true
+
+  after_create :attach_default_avatar
+
+
+  private
+
+    def attach_default_avatar
+      avatar.attach(io: File.open('app/assets/images/default_avatar.png'), filename: 'default_avatar.png')
+    end
 end

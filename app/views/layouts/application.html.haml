@@ -11,14 +11,14 @@
 
 		%nav.navbar.navbar-expand-lg.navbar-light.bg-dark
 			%a.navbar-brand{href: "#"}
-				= "Navbar"
+				= image_tag "logo"
 
 			.collapse.navbar-collapse
 				%ul.navbar-nav.mr-auto
 					%li.nav-item.active.mx-3
 						= link_to("Najnowsze", root_path)
 					%li.nav-item.mx-3
-						= link_to("Losowe", root_path)
+						= link_to("Losowe", random_meme_path)
 					%li.nav-item.mx-3
 						= link_to("Top", top_memes_path)
 					%li.nav-item.mx-3
@@ -40,6 +40,7 @@
 								= f.input :username, label: "Nazwa użytkownika"
 								= f.input :email
 								= f.input :password, label: "Hasło"
+								= f.input :password_confirmation, label: "Potwierdź hasło"
 								= f.submit "Utwórz konto"
 
 						#sign-in-container.d-none

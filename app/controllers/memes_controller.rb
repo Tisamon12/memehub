@@ -9,6 +9,11 @@ class MemesController < ApplicationController
 		render "index"
 	end
 
+	def random_meme
+		@meme = Meme.limit(1).order("RAND()").first
+		render "show"
+	end
+
 	def new
 		@meme = Meme.new
 	end
@@ -18,8 +23,14 @@ class MemesController < ApplicationController
 	end
 
 	def create
-		Meme.create(meme_params.merge({user_id: current_user.id}))
-		redirect_to root_path
+		@meme = Meme.new(meme_params)
+		@meme.user = current_user
+
+		if @meme.save
+			redirect_to root_path
+		else
+			render "new"
+		end
 	end
 
 	private

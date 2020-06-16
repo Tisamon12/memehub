@@ -7,4 +7,6 @@ class Meme < ApplicationRecord
   has_many :favourites, dependent: :destroy
 
   has_many :votes, as: :resource
+
+  validates :title, :meme_img, presence: true
 end

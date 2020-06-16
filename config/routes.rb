@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   get "top-memes", to: "memes#top_memes", as: "top_memes"
 
+  get "random-meme", to: "memes#random_meme", as: "random_meme"
+
   get "users/:id/comments", to: "users#comments", as: "user_comments"
 end
