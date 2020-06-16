@@ -117,3 +117,19 @@ a:hover {
 .vote-btn {
 	color: #616161;
 }
+
+.pagination {
+	.previous_page {
+		margin-right: 20px;
+	}
+
+	.next_page {
+		margin-left: 20px;
+	}
+
+	a, em {
+		margin-left: 10px;
+		margin-right: 10px;
+		text-decoration: none;
+	}
+}

@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   resources :votes, only: [:create]
 
+  get "top-memes", to: "memes#top_memes", as: "top_memes"
+
   get "users/:id/comments", to: "users#comments", as: "user_comments"
 end

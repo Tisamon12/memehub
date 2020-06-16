@@ -1,2 +1,4 @@
 - @memes.each do |meme|
 	= render partial: "meme", locals: {meme: meme}
+
+= will_paginate @memes, previous_label: "Poprzednia strona", next_label: "Następna strona"

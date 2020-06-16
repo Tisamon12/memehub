@@ -1,7 +1,12 @@
 class MemesController < ApplicationController
 
 	def index
-		@memes = Meme.all
+		@memes = Meme.paginate(page: params[:page], per_page: 10).order("created_at DESC")
+	end
+
+	def top_memes
+		@memes = Meme.paginate(page: params[:page], per_page: 10).order("rate DESC")
+		render "index"
 	end
 
 	def new

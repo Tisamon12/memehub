@@ -1,5 +1,7 @@
 = render partial: "user_info"
 
 .mt-5
-	- @user.memes.each do |meme|
+	- @memes.each do |meme|
 		= render partial: "memes/meme", locals: {meme: meme}
+
+= will_paginate @memes, previous_label: "Poprzednia strona", next_label: "Następna strona"
