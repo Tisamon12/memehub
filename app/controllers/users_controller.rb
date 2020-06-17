@@ -10,9 +10,21 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		user = current_user
-		user.assign_attributes(user_params)
-		if user.save
+		@user = current_user
+		@user.assign_attributes(user_params)
+		@user.skip_password_validation = true
+		if @user.save
+			redirect_to root_path
+		else
+			render "edit"
+		end
+	end
+
+	def update_password
+		@user = current_user
+		@user.assign_attributes(user_params)
+		@user.skip_password_validation = false
+		if @user.save
 			redirect_to root_path
 		else
 			render "edit"

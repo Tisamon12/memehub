@@ -15,7 +15,11 @@ class User < ApplicationRecord
   has_many :profile_votes, as: :resource, class_name: "Vote"
   has_many :votes
 
-  validates :username, :email, :password, :password_confirmation, presence: true
+  validates :username, :email, presence: true
+
+  validates :password, :password_confirmation, presence: true, unless: :skip_password_validation
+
+  attr_accessor :skip_password_validation
 
   after_create :attach_default_avatar
 
