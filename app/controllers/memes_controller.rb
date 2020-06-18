@@ -38,6 +38,21 @@ class MemesController < ApplicationController
 		end
 	end
 
+	def destroy
+		@meme = Meme.find(params[:id])
+		if @meme.user_id == current_user.id
+			if @meme.destroy
+				flash[:notice] = "Pomyślnie usunięto mema"
+			else
+				flash[:alert] = "Nie udało się usunąć mema"
+			end
+		else
+			flash[:alert] = "Nie masz uprawnień aby usunąć tego mema"
+		end
+
+		redirect_to root_path
+	end
+
 	private
 
 		def meme_params

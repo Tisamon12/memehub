@@ -6,8 +6,12 @@
 			.comment-header
 				= comment.user.username
 				= comment.created_at
-				- if !user_info && user_signed_in?
-					%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
+				- if user_signed_in?
+					- if !user_info
+						%a{href: "", class: "answerBtn", data: {comment_id: comment.id}} Odpowiedz
+					- if comment.user_id == current_user.id
+						|
+						= link_to "Usuń", comment, method: :delete
 			.comment-vote-container
 				= render partial: "votes/vote", locals: {resource_id: comment.id, resource_type: "Comment"}
 			.comment-text
