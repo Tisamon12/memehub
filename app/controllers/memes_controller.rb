@@ -15,7 +15,12 @@ class MemesController < ApplicationController
 	end
 
 	def new
-		@meme = Meme.new
+		if user_signed_in?
+			@meme = Meme.new
+		else
+			flash.alert = "Zaloguj się aby dodać mema"
+			redirect_to root_path
+		end
 	end
 
 	def show

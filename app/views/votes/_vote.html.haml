@@ -24,11 +24,11 @@
 
 - else # user didn't vote or isn't signed in
 
-	= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: true), method: :post, remote: true do
+	= link_to "#", remote: true do
 		%i.fas.fa-plus-square.vote-btn{data: {resource_id: resource_id}}
 
 	%span.vote-rate{data: {resource_id: resource_id}}
 		= Vote.rate(resource_id, resource_type)
 
-	= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: false), method: :post, remote: true do
+	= link_to "#", remote: true do
 		%i.fas.fa-minus-square.vote-btn{data: {resource_id: resource_id}}
