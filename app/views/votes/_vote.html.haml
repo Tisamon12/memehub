@@ -1,17 +1,30 @@
-- if user_signed_in? && Vote.where(resource_id: resource_id, resource_type: resource_type, user_id: current_user.id).any?
+- if user_signed_in?
 
-	- if Vote.where(resource_id: resource_id, resource_type: resource_type, user_id: current_user.id).first.is_upvote # user upvoted
+	-if Vote.where(resource_id: resource_id, resource_type: resource_type, user_id: current_user.id).any? # user voted
 
-		= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: true), method: :post, remote: true do
-			%i.fas.fa-plus-square.upvote{data: {resource_id: resource_id}}
+		- if Vote.where(resource_id: resource_id, resource_type: resource_type, user_id: current_user.id).first.is_upvote # user upvoted
 
-		%span.vote-rate{data: {resource_id: resource_id}}
-			= Vote.rate(resource_id, resource_type)
+			= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: true), method: :post, remote: true do
+				%i.fas.fa-plus-square.upvote{data: {resource_id: resource_id}}
 
-		= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: false), method: :post, remote: true do
-			%i.fas.fa-minus-square.vote-btn{data: {resource_id: resource_id}}
+			%span.vote-rate{data: {resource_id: resource_id}}
+				= Vote.rate(resource_id, resource_type)
 
-	- else # user downvoted
+			= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: false), method: :post, remote: true do
+				%i.fas.fa-minus-square.vote-btn{data: {resource_id: resource_id}}
+
+		- else # user downvoted
+
+			= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: true), method: :post, remote: true do
+				%i.fas.fa-plus-square.vote-btn{data: {resource_id: resource_id}}
+
+			%span.vote-rate{data: {resource_id: resource_id}}
+				= Vote.rate(resource_id, resource_type)
+
+			= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: false), method: :post, remote: true do
+				%i.fas.fa-minus-square.downvote{data: {resource_id: resource_id}}
+
+	- else
 
 		= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: true), method: :post, remote: true do
 			%i.fas.fa-plus-square.vote-btn{data: {resource_id: resource_id}}
@@ -20,9 +33,9 @@
 			= Vote.rate(resource_id, resource_type)
 
 		= link_to votes_path(resource_id: resource_id, resource_type: resource_type, is_upvote: false), method: :post, remote: true do
-			%i.fas.fa-minus-square.downvote{data: {resource_id: resource_id}}
+			%i.fas.fa-minus-square.vote-btn{data: {resource_id: resource_id}}
 
-- else # user didn't vote or isn't signed in
+- else
 
 	= link_to "#", remote: true do
 		%i.fas.fa-plus-square.vote-btn{data: {resource_id: resource_id}}

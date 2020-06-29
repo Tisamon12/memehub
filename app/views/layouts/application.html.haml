@@ -37,17 +37,16 @@
 						#sign-up-container
 							= "Masz już konto?"
 							%a{href: "", id: "sign-in-btn"} Zaloguj się
-							= simple_form_for(User.new, as: :user, method: :post, url: "/users") do |f|
+							= simple_form_for(@user, as: :user, method: :post, url: "/users") do |f|
 								= f.input :username, label: "Nazwa użytkownika"
 								= f.input :email
 								= f.input :password, label: "Hasło"
 								= f.input :password_confirmation, label: "Potwierdź hasło"
 								= f.submit "Utwórz konto"
-
 						#sign-in-container.d-none
 							= "Nie masz konta?"
 							%a{href: "", id: "sign-up-btn"} Zarejestruj się
-							= simple_form_for(User.new, as: :user, url: session_path(:user), namespace: "sign-in") do |f|
+							= simple_form_for(@user, as: :user, url: session_path(:user), namespace: "sign-in") do |f|
 								= f.input :email
 								= f.input :password, label: "Hasło"
 								= f.submit "Zaloguj się"
